@@ -580,68 +580,42 @@ const getBadges = (flags) => {
     const flagsDict = {
       DISCORD_EMPLOYEE: {
         emoji: "<:DiscordEmployee:1074178651832193065>",
-        shift: 0,
-        ind: 1
       },
       DISCORD_PARTNER: {
         emoji: "<:PartneredServerOwner:1074178654961156236>",
-        shift: 1,
-        ind: 2
       },
       HYPESQUAD_EVENTS: {
         emoji: "<:hypesquad_events:1074178656315916428>",
-        shift: 2,
-        ind: 4
       },
       BUG_HUNTER_LEVEL_1: {
         emoji: "<:BugHunterGreen:1074577741803946104>",
-        shift: 3,
-        ind: 4
       },
       HOUSE_BRAVERY: {
         emoji: "<:Bravery:1074178658194964630>",
-        shift: 6,
-        ind: 64
       },
       HOUSE_BRILLIANCE: {
         emoji: "<:Brilliance:1074178662775144488>",
-        shift: 7,
-        ind: 128
       },
       HOUSE_BALANCE: {
         emoji: "<:Balance:1074178660820590652>",
-        shift: 8,
-        ind: 256
       },
       EARLY_SUPPORTER: {
         emoji: "<:Early:1074178644139835394>",
-        shift: 9,
-        ind: 512
       },
       BUG_HUNTER_LEVEL_2: {
         emoji: "<:BugHunter2:1074178650326446171>",
-        shift: 14,
-        ind: 16384
       },
       VERIFIED_BOT_DEVELOPER: {
         emoji: "<:Dev:1074178642613108808>",
-        shift: 17,
-        ind: 131072
       },
       ACTIVE_DEVELOPER: {
         emoji: "<:ActiveDev:1074178646610280559>",
-        shift: 22,
-        ind: 4194304
       },
       CERTIFIED_MODERATOR: {
         emoji: "<:CertifiedModerator:1074557948778528848>",
-        shift: 18,
-        ind: 262144
       },
       SPAMMER: {
         emoji: "⌨",
-        shift: 20,
-        ind: 1048704
       }
     };
   
