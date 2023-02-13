@@ -647,7 +647,7 @@ const getBadges = (flags) => {
   
     return Object.keys(flagsDict).reduce((acc, flag) => {
       if (flags & (1 << flagsDict[flag].shift)) {
-        acc.push([flagsDict[flag].emoji, flagsDict[flag].ind]);
+        acc.push([flagsDict[flag].emoji]);
       }
       return acc;
     }, []);
